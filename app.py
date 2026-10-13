@@ -354,6 +354,8 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if path == "/healthz" and method == "GET":
                 return self._send_json(200, {"status": "ok"})
+            if path == "/debug/error" and method == "GET":
+                raise RuntimeError("Firestore GET failed: test error, triggered via GET /debug/error for log verification")
             if path == "/login" and method == "POST":
                 return self._handle_login()
             if path == "/chat" and method == "POST":
